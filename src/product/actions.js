@@ -13,20 +13,20 @@ import { getProductByBarcode, insertProduct } from '../app/firebase';
 
 export function fetchProductRequest() {
   return {
-    type: FETCH_PRODUCT_PENDING
+    type: FETCH_PRODUCT_PENDING,
   };
 }
 export function fetchProductSuccess(response) {
   return {
     type: FETCH_PRODUCT_SUCCESS,
-    payload: response
+    payload: response,
   };
 }
 export function fetchProductFailure(error) {
   return {
     type: FETCH_PRODUCT_FAILURE,
     payload: error || null,
-    error: true
+    error: true,
   };
 }
 export function fetchProduct(barcode, location) {
@@ -39,29 +39,25 @@ export function fetchProduct(barcode, location) {
       })
       .catch((err) => {
         dispatch(fetchProductFailure(err));
-      })
-    ;
+      });
   };
 }
 
 export function addProductRequest() {
   return {
-    type: ADD_PRODUCT_PENDING
+    type: ADD_PRODUCT_PENDING,
   };
 }
-export function addProductSuccess(product) {
+export function addProductSuccess() {
   return {
     type: ADD_PRODUCT_SUCCESS,
-    payload: {
-      product
-    }
   };
 }
 export function addProductFailure(error) {
   return {
     type: ADD_PRODUCT_FAILURE,
     payload: error || null,
-    error: true
+    error: true,
   };
 }
 export function addProduct(product) {
@@ -69,8 +65,8 @@ export function addProduct(product) {
     dispatch(addProductRequest());
 
     return insertProduct(product)
-      .then((response) => {
-        dispatch(addProductSuccess(response));
+      .then(() => {
+        dispatch(addProductSuccess());
       })
       .catch((err) => {
         dispatch(addProductFailure(err));
@@ -95,8 +91,8 @@ export function addProductOffline(product) {
     dispatch(addProductRequest());
 
     return insertProductOffline(product)
-      .then((response) => {
-        dispatch(addProductSuccess(response));
+      .then(() => {
+        dispatch(addProductSuccess());
       })
       .catch((err) => {
         dispatch(addProductFailure(err));
