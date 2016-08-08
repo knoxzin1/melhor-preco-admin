@@ -70,8 +70,7 @@ export function addProduct(product) {
       })
       .catch((err) => {
         dispatch(addProductFailure(err));
-      })
-    ;
+      });
   };
 }
 export function insertProductOffline(product) {
