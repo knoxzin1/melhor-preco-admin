@@ -33,7 +33,7 @@ export function fetchProduct(barcode, location) {
   return (dispatch) => {
     dispatch(fetchProductRequest());
 
-    getProductByBarcode(barcode, location)
+    return getProductByBarcode(barcode, location)
       .then((response) => {
         dispatch(fetchProductSuccess(response));
       })
