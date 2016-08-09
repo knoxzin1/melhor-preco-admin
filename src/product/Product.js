@@ -15,9 +15,7 @@ import ProductForm from './ProductForm';
 export default class Product extends Component {
 
   componentDidMount() {
-    if (this.props.isConnected) {
-      this.props.fetchProduct();
-    }
+    this.props.fetchProduct();
   }
 
   handleCreated = () => {

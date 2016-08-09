@@ -20,17 +20,23 @@ import * as firebase from '../app/firebase';
 describe('product/actions.js', () => {
   describe('fetchProduct', () => {
     it('should call FETCH_PRODUCT_SUCCESS after fetching', (done) => {
+      const productId = '-Iuy2dANtFBZ-OK7I-XK';
+      const locationProductId = '-Iuy2dANtFBZ-OK7I-XL';
       const expectedResult = {
+        productId: productId,
         product: {
-          '1': {
+          [productId]: {
             barcode: '123',
             name: 'test product',
           },
         },
+        locationProductId: locationProductId,
         locationProduct: {
-          location: '1',
-          price: 2.64,
-          product: '1',
+          [locationProductId]: {
+            location: '1',
+            price: 2.64,
+            product: '1',
+          },
         },
         navigatorKey: 1,
       };
@@ -47,7 +53,12 @@ describe('product/actions.js', () => {
         },
       ];
 
-      const store = mockStore({});
+      const store = mockStore({
+        app: {
+          isConnected: true,
+        },
+      });
+
       store.dispatch(actions.fetchProduct('123', '1', 1))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);
@@ -72,11 +83,31 @@ describe('product/actions.js', () => {
         },
       ];
 
-      const store = mockStore({});
+      const store = mockStore({
+        app: {
+          isConnected: true,
+        },
+      });
+
       store.dispatch(actions.fetchProduct('123', '1', 1))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);
           getProductByBarcode.restore();
+        })
+        .then(done);
+    });
+
+    it('should not trigger actions if app.isConnected is falsy', (done) => {
+
+      const store = mockStore({
+        app: {
+          isConnected: false,
+        },
+      });
+
+      store.dispatch(actions.fetchProduct('123', '1', 1))
+        .then(() => {
+          assert.deepEqual(store.getActions(), []);
         })
         .then(done);
     });
@@ -101,13 +132,19 @@ describe('product/actions.js', () => {
         barcode: '',
       };
 
-      const store = mockStore({});
+      const store = mockStore({
+        app: {
+          isConnected: true,
+        },
+      });
+
       store.dispatch(actions.addProduct(product))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);
           insertProduct.restore();
         })
-        .then(done);
+        .then(done)
+        .catch(done);
     });
 
     it('should call ADD_PRODUCT_FAILURE if anything goes wrong', (done) => {
@@ -131,7 +168,12 @@ describe('product/actions.js', () => {
         barcode: '',
       };
 
-      const store = mockStore({});
+      const store = mockStore({
+        app: {
+          isConnected: true,
+        },
+      });
+
       store.dispatch(actions.addProduct(product))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);

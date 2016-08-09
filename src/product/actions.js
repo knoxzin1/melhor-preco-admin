@@ -11,6 +11,7 @@ import {
   CLEAR_PRODUCT_FORM,
 } from '../app/actionTypes';
 
+import selectn from 'selectn';
 import offlineStore from 'react-native-simple-store';
 import { getProductByBarcode, insertProduct } from '../app/firebase';
 
@@ -33,7 +34,13 @@ export function fetchProductFailure(error) {
   };
 }
 export function fetchProduct(barcode, location, navigatorKey) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    // exit early if there's no internet connection
+    if (!selectn('app.isConnected', getState())) {
+      return Promise.resolve();
+    }
+
     dispatch(fetchProductRequest());
 
     return getProductByBarcode(barcode, location)
@@ -67,7 +74,16 @@ export function addProductFailure(error) {
   };
 }
 export function addProduct(product) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    // save on cache if there's no internet connection
+    if (!selectn('app.isConnected', getState())) {
+      dispatch(addProductOffline(product));
+
+      // mocha expects addProduct to return a Promise
+      return Promise.resolve();
+    }
+
     dispatch(addProductRequest());
 
     return insertProduct(product)

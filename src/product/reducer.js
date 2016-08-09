@@ -99,25 +99,25 @@ export function productFormReducer(state = initialFormState, action) {
     case CLEAR_PRODUCT_FORM:
       return initialFormState;
     case FETCH_PRODUCT_SUCCESS:
-      const { product, locationProduct } = action.payload;
-      const key = action.payload.navigatorKey;
+      const {
+        productId,
+        product,
+        locationProduct,
+        locationProductId,
+      } = action.payload;
+
+      const key = action.payload.navigatorKey.toString();
 
       if (!product) {
         return state;
       }
-
-      const productId = Object.keys(product)[0];
-
-      const locationProductId = locationProduct
-        ? locationProduct.location
-        : null;
 
       return Object.assign(state, {
         [key]: {
           productId,
           locationProductId,
           name: product[productId].name,
-          price: locationProduct ? locationProduct.price : '',
+          price: locationProduct ? locationProduct[locationProductId].price : '',
         },
       });
     default:

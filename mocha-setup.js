@@ -4,6 +4,8 @@ const path = require('path');
 const Module = require('module');
 const orig_findPath = Module._findPath;
 
+global.__DEV__ = false;
+
 /**
  * Fix image loading error on mocha
  */

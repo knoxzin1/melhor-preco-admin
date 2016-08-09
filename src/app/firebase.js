@@ -20,6 +20,7 @@ export function getLocationProduct(productId, location) {
     .once('value')
     .then((snapshot) => {
       let locationProduct = null;
+      let locationProductId = null;
 
       if (!snapshot.val()) {
         return null;
@@ -27,12 +28,18 @@ export function getLocationProduct(productId, location) {
 
       snapshot.forEach((childSnapshot) => {
         if (childSnapshot.val().location === location) {
+          locationProductId = childSnapshot.getKey();
           locationProduct = childSnapshot.val();
           return true;
         }
       });
 
-      return locationProduct;
+      return {
+        locationProduct: locationProduct
+          ? {[locationProductId]: locationProduct}
+          : null,
+        locationProductId,
+      };
     });
 }
 
@@ -42,6 +49,7 @@ export function getProductByBarcode(barcode, location) {
   return productsRef
     .orderByChild('barcode')
     .equalTo(barcode)
+    .limitToFirst(1)
     .once('value')
     .then((snapshot) => {
       const product = snapshot.val();
@@ -52,10 +60,12 @@ export function getProductByBarcode(barcode, location) {
         const productId = Object.keys(product)[0];
 
         return getLocationProduct(productId, location)
-          .then((locationProduct) => {
+          .then(({locationProduct, locationProductId}) => {
             return {
+              productId,
               product,
               locationProduct,
+              locationProductId,
             };
           });
       }

@@ -12,7 +12,6 @@ import Product from './Product';
 const mapStateToProps = (state, props) => {
   return {
     ...productSelector(state),
-    isConnected: state.app.isConnected,
     formValue: state.productForm[props.navigatorKey],
   };
 };
@@ -23,11 +22,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(updateProductForm(value, props.navigatorKey));
     },
     handleSubmit: (product) => {
-      if (props.isConnected) {
-        dispatch(addProduct(product));
-      } else {
-        dispatch(addProductOffline(product));
-      }
+      dispatch(addProduct(product));
     },
     fetchProduct: () => {
       dispatch(fetchProduct(props.barcode, props.location, props.navigatorKey));
