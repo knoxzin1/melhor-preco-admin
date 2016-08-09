@@ -23,9 +23,7 @@ export default class LocationList extends Component {
       dataSource: this.state.dataSource.cloneWithRows(this.props.locations)
     });
 
-    if (this.props.isConnected) {
-      this.props.fetchLocations();
-    }
+    this.props.fetchLocations();
   }
 
   componentWillReceiveProps(props) {

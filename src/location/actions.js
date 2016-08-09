@@ -6,6 +6,7 @@ import {
   CHANGE_LOCATION_SCANNER_STATE,
 } from '../app/actionTypes';
 
+import selectn from 'selectn';
 import { getLocations } from '../app/firebase';
 
 export function fetchLocationsRequest() {
@@ -30,7 +31,14 @@ export function fetchLocationsFailure(error) {
   };
 }
 export function fetchLocations() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+
+    // exit early if there's no internet connection
+    if (!selectn('app.isConnected', getState())) {
+      // mocha expects this function to return a Promise
+      return Promise.resolve();
+    }
+
     dispatch(fetchLocationsRequest());
 
     return getLocations()

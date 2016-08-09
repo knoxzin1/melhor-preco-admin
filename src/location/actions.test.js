@@ -42,7 +42,12 @@ describe('location/actions.js', () => {
       },
     ];
 
-    const store = mockStore({});
+    const store = mockStore({
+      app: {
+        isConnected: true,
+      },
+    });
+
     store.dispatch(fetchLocations())
       .then(() => {;
         assert.deepEqual(store.getActions(), expectedActions);
@@ -67,7 +72,12 @@ describe('location/actions.js', () => {
       },
     ];
 
-    const store = mockStore({});
+    const store = mockStore({
+      app: {
+        isConnected: true,
+      },
+    });
+
     store.dispatch(fetchLocations())
       .then(() => {;
         assert.deepEqual(store.getActions(), expectedActions);
