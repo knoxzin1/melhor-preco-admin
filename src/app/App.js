@@ -51,10 +51,13 @@ export default class App extends Component {
   };
 
   renderScene(route, navigator) {
+    var key = '__navigatorRouteID';
+
     _navigator = navigator;
 
     const component = route.name;
     const passAhead = {
+      navigatorKey: route[key] ? route[key] : null,
       ...route,
       navigator,
     };

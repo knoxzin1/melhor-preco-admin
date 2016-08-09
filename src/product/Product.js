@@ -8,6 +8,7 @@ import {
   ToastAndroid,
 } from 'react-native';
 
+import selectn from 'selectn';
 import { BackButtonIcon, Loading } from '../components';
 import ProductForm from './ProductForm';
 
@@ -19,12 +20,6 @@ export default class Product extends Component {
     }
   }
 
-  getTitle() {
-    return this.props.product
-      ? this.props.product.name
-      : 'Adicionar produto';
-  }
-
   handleCreated = () => {
     ToastAndroid.show('Produto criado', ToastAndroid.SHORT);
     this.props.handleProductUpdated();
@@ -32,8 +27,8 @@ export default class Product extends Component {
 
   handleSubmit = (name, price) => {
     const product = {
-      productId: this.props.productId,
-      locationProductId: this.props.locationProductId,
+      productId: selectn('formValue.productId', this.props),
+      locationProductId: selectn('formValue.locationProductId', this.props),
       name: name,
       price: price,
       barcode: this.props.barcode,
@@ -52,19 +47,18 @@ export default class Product extends Component {
         <ToolbarAndroid
           navIcon={BackButtonIcon}
           onIconClicked={this.props.handleIconClicked}
-          title={this.getTitle()}
+          title="Atualizar Produto"
           style={styles.header}
           titleColor="white" />
         <View style={styles.container}>
           <Text style={styles.title}>Cadastrar/Alterar Produto</Text>
           <View style={styles.formContainer}>
             <ProductForm
+              formValue={this.props.formValue}
               created={this.props.created}
               onCreated={this.handleCreated}
               onSubmit={this.handleSubmit}
-              navigator={this.props.navigator}
-              product={this.props.product}
-              locationProduct={this.props.locationProduct} />
+              onFormChange={this.props.handleFormChange} />
           </View>
         </View>
       </View>

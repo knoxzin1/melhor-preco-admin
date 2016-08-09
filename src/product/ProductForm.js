@@ -16,45 +16,14 @@ import {
 
 export default class ProductForm extends Component {
 
-  state = {
-    value: {
-      name: '',
-      price: '',
-    },
-  };
-
-  resetFormState() {
-    this.setState({
-      value: {
-        name: '',
-        price: '',
-      },
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (!this.props.product && nextProps.product) {
-      this.setState({
-        value: {
-          name: nextProps.product.name,
-          price: nextProps.locationProduct
-            ? nextProps.locationProduct.price.toString()
-            : this.state.form.price,
-        }
-      });
-    }
-
-    if (!nextProps.product) {
-      this.resetFormState();
-    }
-
     if (!this.props.created && nextProps.created) {
       this.props.onCreated();
     }
   }
 
   onChange = (value) => {
-    this.setState({value});
+    this.props.onFormChange(value);
   };
 
   handlePress = () => {
@@ -71,7 +40,7 @@ export default class ProductForm extends Component {
           ref="form"
           type={ProductModel}
           options={options}
-          value={this.state.value}
+          value={this.props.formValue}
           onChange={this.onChange} />
         <View style={styles.buttonContainer}>
           <Button onPress={this.handlePress}>Salvar</Button>

@@ -6,16 +6,14 @@ import {
   ADD_PRODUCT_PENDING,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_FAILURE,
+
+  UPDATE_PRODUCT_FORM,
+  CLEAR_PRODUCT_FORM,
 } from '../app/actionTypes';
 
 const initialState = {
   isFetching: false,
-  isLoaded: false,
   error: false,
-  product: null,
-  productId: null,
-  locationProduct: null,
-  locationProductId: null,
   isCreating: false,
   created: false,
 };
@@ -29,50 +27,16 @@ export function productReducer(state = initialState, action) {
         error: false,
       };
     case FETCH_PRODUCT_SUCCESS:
-      const { product, locationProduct } = action.payload;
-
-      if (!product) {
-        return {
-          isFetching: false,
-          isLoaded: true,
-          error: false,
-          product: null,
-          productId: null,
-          locationProduct: null,
-          locationProductId: null,
-          isCreating: false,
-          created: false,
-        };
-      }
-
-      const productId = Object.keys(product)[0];
-
-      const locationProductId = locationProduct
-        ? locationProduct.location
-        : null;
-
       return {
+        ...state,
         isFetching: false,
-        isLoaded: true,
         error: false,
-        product: product[productId],
-        productId,
-        locationProduct,
-        locationProductId,
-        isCreating: false,
-        created: false,
       };
     case FETCH_PRODUCT_FAILURE:
       return {
+        ...state,
         isFetching: false,
-        isLoaded: true,
         error: action.payload,
-        product: null,
-        productId: null,
-        locationProduct: null,
-        locationProductId: null,
-        isCreating: false,
-        created: false,
       };
     case ADD_PRODUCT_PENDING:
       return {
@@ -108,6 +72,54 @@ export function productsReducer(state = {}, action) {
       }
 
       return Object.assign(state, product);
+    default:
+      return state;
+  }
+}
+
+const initialFormState = [];
+export function productFormReducer(state = initialFormState, action) {
+  switch (action.type) {
+    case UPDATE_PRODUCT_FORM:
+      const {
+        name,
+        price,
+        navigatorKey,
+      } = action.payload;
+
+      const oldState = state[navigatorKey];
+
+      return Object.assign(state, {
+        [navigatorKey]: {
+          ...oldState,
+          name,
+          price,
+        },
+      });
+    case CLEAR_PRODUCT_FORM:
+      return initialFormState;
+    case FETCH_PRODUCT_SUCCESS:
+      const { product, locationProduct } = action.payload;
+      const key = action.payload.navigatorKey;
+
+      if (!product) {
+        return state;
+      }
+
+      const productId = Object.keys(product)[0];
+
+      const locationProductId = locationProduct
+        ? locationProduct.location
+        : null;
+
+      return Object.assign(state, {
+        [key]: {
+          productId,
+          locationProductId,
+          name: product[productId].name,
+          price: locationProduct ? locationProduct.price : '',
+        },
+      });
     default:
       return state;
   }

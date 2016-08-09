@@ -4,13 +4,27 @@ import { AsyncStorage } from 'react-native';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { setAppRehydrated } from './actions';
+import { clearProductForm } from '../product';
+
+let middlewares = [thunk];
+
+if (__DEV__) {
+  const createLogger = require('redux-logger');
+  const logger = createLogger();
+  middlewares.push(logger);
+}
 
 const store = createStore(reducers, compose(
-  applyMiddleware(thunk),
+  applyMiddleware(...middlewares),
   autoRehydrate()
 ));
 
-persistStore(store, {storage: AsyncStorage}, () => {
+const options = {
+  storage: AsyncStorage,
+  blacklist: ['productForm'],
+};
+
+persistStore(store, options, () => {
   store.dispatch(setAppRehydrated());
 });
 

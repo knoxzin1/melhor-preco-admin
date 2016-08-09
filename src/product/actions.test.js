@@ -32,6 +32,7 @@ describe('product/actions.js', () => {
           price: 2.64,
           product: '1',
         },
+        navigatorKey: 1,
       };
       const getProductByBarcode = sinon.stub(firebase, 'getProductByBarcode');
       getProductByBarcode.returns(Promise.resolve(expectedResult));
@@ -47,7 +48,7 @@ describe('product/actions.js', () => {
       ];
 
       const store = mockStore({});
-      store.dispatch(actions.fetchProduct('123', '1'))
+      store.dispatch(actions.fetchProduct('123', '1', 1))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);
           getProductByBarcode.restore();
@@ -72,7 +73,7 @@ describe('product/actions.js', () => {
       ];
 
       const store = mockStore({});
-      store.dispatch(actions.fetchProduct('123', '1'))
+      store.dispatch(actions.fetchProduct('123', '1', 1))
         .then(() => {
           assert.deepEqual(store.getActions(), expectedActions);
           getProductByBarcode.restore();

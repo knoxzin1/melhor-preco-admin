@@ -1,5 +1,11 @@
 import { connect } from 'react-redux';
-import { addProduct, addProductOffline, fetchProduct } from './actions';
+import {
+  addProduct,
+  addProductOffline,
+  fetchProduct,
+  updateProductForm,
+  clearProductForm,
+} from './actions';
 import { productSelector } from './selector';
 import Product from './Product';
 
@@ -7,11 +13,15 @@ const mapStateToProps = (state, props) => {
   return {
     ...productSelector(state),
     isConnected: state.app.isConnected,
+    formValue: state.productForm[props.navigatorKey],
   };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
+    handleFormChange: (value) => {
+      dispatch(updateProductForm(value, props.navigatorKey));
+    },
     handleSubmit: (product) => {
       if (props.isConnected) {
         dispatch(addProduct(product));
@@ -20,7 +30,7 @@ const mapDispatchToProps = (dispatch, props) => {
       }
     },
     fetchProduct: () => {
-      dispatch(fetchProduct(props.barcode, props.location));
+      dispatch(fetchProduct(props.barcode, props.location, props.navigatorKey));
     },
     handleProductUpdated: () => {
       props.navigator.push({

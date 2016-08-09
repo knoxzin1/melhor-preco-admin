@@ -11,6 +11,7 @@ import {
 import {
   productReducer,
   productsReducer,
+  productFormReducer,
 } from '../product';
 
 const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
 
   product: productReducer,
   products: productsReducer,
+  productForm: productFormReducer,
 });
 
 export default rootReducer;

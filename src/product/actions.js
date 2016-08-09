@@ -6,6 +6,9 @@ import {
   ADD_PRODUCT_PENDING,
   ADD_PRODUCT_SUCCESS,
   ADD_PRODUCT_FAILURE,
+
+  UPDATE_PRODUCT_FORM,
+  CLEAR_PRODUCT_FORM,
 } from '../app/actionTypes';
 
 import offlineStore from 'react-native-simple-store';
@@ -29,13 +32,16 @@ export function fetchProductFailure(error) {
     error: true,
   };
 }
-export function fetchProduct(barcode, location) {
+export function fetchProduct(barcode, location, navigatorKey) {
   return (dispatch) => {
     dispatch(fetchProductRequest());
 
     return getProductByBarcode(barcode, location)
       .then((response) => {
-        dispatch(fetchProductSuccess(response));
+        dispatch(fetchProductSuccess({
+          ...response,
+          navigatorKey,
+        }));
       })
       .catch((err) => {
         dispatch(fetchProductFailure(err));
@@ -97,5 +103,20 @@ export function addProductOffline(product) {
         dispatch(addProductFailure(err));
       })
     ;
+  };
+}
+
+export function updateProductForm(value, navigatorKey) {
+  return {
+    type: UPDATE_PRODUCT_FORM,
+    payload: {
+      ...value,
+      navigatorKey,
+    }
+  };
+}
+export function clearProductForm() {
+  return {
+    type: CLEAR_PRODUCT_FORM,
   };
 }
