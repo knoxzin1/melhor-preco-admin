@@ -29,7 +29,12 @@ export default class LocationList extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (!this.props.isConnected && props.isConnected && this.props.isEmpty) {
+    // Fetch the list again in case of internet reconnection
+    if (!this.props.isConnected
+     && props.isConnected
+     && this.props.isEmpty
+     && !this.props.isFetching
+    ) {
       this.props.fetchLocations();
     }
 
