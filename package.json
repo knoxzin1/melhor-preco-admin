@@ -4,7 +4,6 @@
   "description": "Cadastro de produtos do app Melhor Preco",
   "main": "index.android.js",
   "scripts": {
-    "storybook": "storybook start -p 9001",
     "test": "mocha --require mocha-setup.js --require react-native-mock/mock --compilers js:babel-register,js:babel-polyfill --recursive src"
   },
   "author": "Rodrigo Siqueira <knoxzin1@gmail.com> (http://knoxzin1.github.io)",
