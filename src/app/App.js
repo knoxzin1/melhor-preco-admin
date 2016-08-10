@@ -15,6 +15,7 @@ import {
 } from '../location';
 
 import { ProductContainer } from '../product';
+import { LoginContainer } from '../login';
 
 // Back button handler
 let _navigator;
@@ -69,6 +70,8 @@ export default class App extends Component {
         return (<LocationContainer {...passAhead} />);
       case 'Product':
         return (<ProductContainer {...passAhead} />);
+      case 'Login':
+        return (<LoginContainer {...passAhead} />);
       default:
         return false;
     }
@@ -86,7 +89,7 @@ export default class App extends Component {
       <Navigator
         renderScene={this.renderScene}
         initialRoute={{
-          name: 'LocationList'
+          name: 'Login'
         }}
         configureScene={() => Navigator.SceneConfigs.FadeAndroid} />
     );

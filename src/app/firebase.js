@@ -3,6 +3,12 @@ import config from '../../config';
 
 const firebase = initializeApp(config);
 
+export { firebase };
+
+export function firebaseLogin(email, password) {
+  return firebase.auth().signInWithEmailAndPassword(email, password);
+}
+
 export function getLocations() {
   const locationsRef = firebase.database().ref('locations');
 

@@ -14,6 +14,11 @@ import {
   productFormReducer,
 } from '../product';
 
+import {
+  loginReducer,
+  loginFormReducer,
+} from '../login';
+
 const rootReducer = combineReducers({
 
   app: appReducer,
@@ -25,6 +30,9 @@ const rootReducer = combineReducers({
   product: productReducer,
   products: productsReducer,
   productForm: productFormReducer,
+
+  login: loginReducer,
+  loginForm: loginFormReducer,
 });
 
 export default rootReducer;
