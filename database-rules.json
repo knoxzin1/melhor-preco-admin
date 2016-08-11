@@ -1,0 +1,42 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth != null",
+    "locations": {
+      "$location_id": {
+        ".validate": "newData.hasChildren(['name'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        }
+      }
+    },
+    "products": {
+      ".indexOn": "barcode",
+      "$product_id": {
+        ".validate": "newData.hasChildren(['name', 'barcode'])",
+        "barcode": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "$other": { ".validate": false }
+      }
+    },
+    "locationProduct": {
+      ".indexOn": ["location", "product"],
+      "$locationProduct_id": {
+        ".validate": "newData.hasChildren(['location', 'price', 'product'])",
+        "location": {
+          ".validate": "newData.isString() && newData.val().length > 0 && root.child('locations').child(newData.val()).exists()"
+        },
+        "product": {
+          ".validate": "newData.isString() && newData.val().length > 0 && root.child('products').child(newData.val()).exists()"
+        },
+        "price": {
+          ".validate": "newData.isNumber() && newData.val() > 0"
+        }
+      }
+    }
+  }
+}
