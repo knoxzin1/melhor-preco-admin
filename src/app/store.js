@@ -21,7 +21,7 @@ const store = createStore(reducers, compose(
 
 const options = {
   storage: AsyncStorage,
-  blacklist: ['productForm', 'loginForm'],
+  blacklist: ['productForm', 'loginForm', 'login'],
 };
 
 persistStore(store, options, () => {
