@@ -32,7 +32,7 @@ export function loginReducer(state = initialState, action) {
     case LOGIN_FAILURE:
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         error: action.payload,
         userId: null,
       };
@@ -42,14 +42,14 @@ export function loginReducer(state = initialState, action) {
       if (!userId) {
         return {
           ...state,
-          isFetching: false,
+          isLoading: false,
           error: 'Erro interno, tente novamente',
         };
       }
 
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         error: false,
         userId,
       };
