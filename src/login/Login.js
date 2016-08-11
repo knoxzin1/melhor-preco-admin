@@ -24,7 +24,7 @@ export default class Login extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.error) {
+    if (!this.props.error && props.error) {
       const error = typeof props.error === 'string' ? props.error : 'Erro';
       ToastAndroid.show(error, ToastAndroid.SHORT);
     }
