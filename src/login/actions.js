@@ -2,6 +2,7 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  CLEAR_LOGIN,
 
   UPDATE_LOGIN_FORM,
 } from '../app/actionTypes';
@@ -46,6 +47,12 @@ export function login(email, password) {
       });
   };
 }
+
+export function clearLogin() {
+  return {
+    type: CLEAR_LOGIN,
+  };
+};
 
 export function updateLoginForm(value) {
   return {

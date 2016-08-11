@@ -34,7 +34,7 @@ export default class Login extends Component {
     if (user) {
       this.props.handleLoginSuccess(user);
     } else {
-      this.props.handleLoginError();
+      this.props.handleLoginEmpty();
     }
   };
 

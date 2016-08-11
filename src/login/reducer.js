@@ -2,6 +2,7 @@ import {
   LOGIN_PENDING,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  CLEAR_LOGIN,
 
   UPDATE_LOGIN_FORM,
 } from '../app/actionTypes';
@@ -16,6 +17,11 @@ const initialState = {
 
 export function loginReducer(state = initialState, action) {
   switch (action.type) {
+    case CLEAR_LOGIN:
+      return {
+        ...state,
+        userId: null,
+      };
     case LOGIN_PENDING:
       return {
         ...state,

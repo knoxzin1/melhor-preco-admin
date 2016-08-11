@@ -3,6 +3,7 @@ import {
   login,
   loginSuccess,
   loginFailure,
+  clearLogin,
   updateLoginForm,
 } from './actions';
 
@@ -37,8 +38,8 @@ const mapDispatchToProps = (dispatch, props) => {
         name: 'LocationList',
       });
     },
-    handleLoginError: () => {
-      dispatch(loginFailure('Erro ao logar'));
+    handleLoginEmpty: () => {
+      dispatch(clearLogin());
     },
   };
 };
