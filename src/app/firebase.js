@@ -92,6 +92,7 @@ const insertOrUpdateProduct = (product) => {
   var updates = {};
   updates[`/products/${productId}`] = {
     name,
+    reversedName: name.split('').reverse().join(''),
     barcode,
   };
   updates[`/locationProduct/${locationProductId}`] = {

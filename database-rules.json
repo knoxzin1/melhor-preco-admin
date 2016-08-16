@@ -11,13 +11,16 @@
       }
     },
     "products": {
-      ".indexOn": "barcode",
+      ".indexOn": ["barcode", "name", "reversedName"],
       "$product_id": {
         ".validate": "newData.hasChildren(['name', 'barcode'])",
         "barcode": {
           ".validate": "newData.isString() && newData.val().length > 0"
         },
         "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "reversedName": {
           ".validate": "newData.isString() && newData.val().length > 0"
         },
         "$other": { ".validate": false }
