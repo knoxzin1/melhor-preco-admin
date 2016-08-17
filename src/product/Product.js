@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   Text,
   StyleSheet,
   ToolbarAndroid,
-  TextInput,
   ToastAndroid,
 } from 'react-native';
 
@@ -13,6 +16,24 @@ import { BackButtonIcon, Loading } from '../components';
 import ProductForm from './ProductForm';
 
 export default class Product extends Component {
+
+  static propTypes = {
+    fetchProduct: PropTypes.func.isRequired,
+    handleProductUpdated: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleFormChange: PropTypes.func.isRequired,
+    handleIconClicked: PropTypes.func.isRequired,
+    barcode: PropTypes.string.isRequired,
+    location: PropTypes.string.isRequired,
+    formValue: PropTypes.shape({
+      productId: PropTypes.string,
+      locationProductId: PropTypes.string,
+    }),
+    isFetching: PropTypes.bool.isRequired,
+    created: PropTypes.bool.isRequired,
+    isCreating: PropTypes.bool.isRequired,
+    error: PropTypes.any.isRequired,
+  };
 
   componentDidMount() {
     this.props.fetchProduct();

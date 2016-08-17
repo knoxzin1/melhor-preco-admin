@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   Text,
   StyleSheet,
-  TouchableNativeFeedback,
   ToolbarAndroid,
   TextInput,
 } from 'react-native';
@@ -12,6 +15,18 @@ import BarcodeScanner from 'react-native-barcodescanner';
 import { BackButtonIcon, Button } from '../components';
 
 export default class Location extends Component {
+
+  static propTypes = {
+    scannerOpen: PropTypes.bool.isRequired,
+    productDetails: PropTypes.func.isRequired,
+    productDetailsScanner: PropTypes.func.isRequired,
+    closeScanner: PropTypes.func.isRequired,
+    openScanner: PropTypes.func.isRequired,
+    handleIconClicked: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 
   render() {
     if (this.props.scannerOpen) {

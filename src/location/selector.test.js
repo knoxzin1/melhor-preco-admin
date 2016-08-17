@@ -82,7 +82,7 @@ describe('location/selector.js', () => {
       const location = locationListSelector(state);
       assert.lengthOf(location.locations, 1);
 
-      for (loc of location.locations) {
+      for (var loc of location.locations) {
         assert.property(loc, 'id');
       }
     });

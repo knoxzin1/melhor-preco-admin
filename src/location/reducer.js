@@ -24,7 +24,7 @@ export function locationListReducer(state = initialState, action) {
         isFetching: true,
         error: false,
       };
-    case FETCH_LOCATIONS_SUCCESS:
+    case FETCH_LOCATIONS_SUCCESS: {
       const { payload } = action;
       const ids = union(state.ids, payload.ids);
 
@@ -35,13 +35,14 @@ export function locationListReducer(state = initialState, action) {
         error: false,
         isEmpty: ids.length === 0,
       };
+    }
     case FETCH_LOCATIONS_FAILURE:
       return {
         ...state,
         isFetching: false,
         isLoaded: true,
         error: action.payload,
-      }
+      };
     default:
       return state;
   }

@@ -1,7 +1,6 @@
 import { assert } from 'chai';
 import {
   productReducer,
-  productsReducer,
   productFormReducer,
 } from './reducer';
 
@@ -15,7 +14,6 @@ import {
   ADD_PRODUCT_FAILURE,
 
   UPDATE_PRODUCT_FORM,
-  CLEAR_PRODUCT_FORM,
 } from '../app/actionTypes';
 
 describe('product/reducer.js', () => {

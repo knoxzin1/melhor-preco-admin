@@ -34,7 +34,7 @@ export function checkOfflineProducts() {
   return (dispatch) => {
     return offlineStore.get('offlineProductList')
       .then((products) => {
-        return insertProducts(products)
+        return insertProducts(products);
       })
       .then(() => {
         return offlineStore.delete('offlineProductList');

@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   StyleSheet,
@@ -6,11 +10,24 @@ import {
   ToastAndroid,
 } from 'react-native';
 
-import selectn from 'selectn';
 import { Loading } from '../components';
 import LoginForm from './LoginForm';
 
 export default class Login extends Component {
+
+  static propTypes = {
+    onAuthStateChanged: PropTypes.func.isRequired,
+    error: PropTypes.any.isRequired,
+    handleLoginSuccess: PropTypes.func.isRequired,
+    handleLoginEmpty: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    formValue: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+    }),
+    handleFormChange: PropTypes.func.isRequired,
+  };
 
   authStateObserver = null;
 

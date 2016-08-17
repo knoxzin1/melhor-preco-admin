@@ -49,7 +49,7 @@ describe('location/actions.js', () => {
     });
 
     store.dispatch(fetchLocations())
-      .then(() => {;
+      .then(() => {
         assert.deepEqual(store.getActions(), expectedActions);
         getLocations.restore();
       })
@@ -79,7 +79,7 @@ describe('location/actions.js', () => {
     });
 
     store.dispatch(fetchLocations())
-      .then(() => {;
+      .then(() => {
         assert.deepEqual(store.getActions(), expectedActions);
         getLocations.restore();
       })

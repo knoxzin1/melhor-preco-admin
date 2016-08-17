@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   Text,
@@ -7,6 +11,12 @@ import {
 } from 'react-native';
 
 export default class LocationItem extends Component {
+
+  static propTypes = {
+    handlePress: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  };
 
   render() {
     return (

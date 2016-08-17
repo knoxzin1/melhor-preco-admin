@@ -4,7 +4,6 @@ import { AsyncStorage } from 'react-native';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { setAppRehydrated } from './actions';
-import { clearProductForm } from '../product';
 
 let middlewares = [thunk];
 

@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   Text,
@@ -9,6 +13,10 @@ import {
 import { Button } from './index';
 
 export default class NoConnection extends Component {
+
+  static propTypes = {
+    onPress: PropTypes.func,
+  };
 
   render() {
     return (

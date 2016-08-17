@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
-  Text,
   StyleSheet,
-  TextInput,
   ListView,
   ToolbarAndroid,
 } from 'react-native';
@@ -12,6 +14,15 @@ import LocationItem from './LocationItem';
 import { Loading, NoConnection } from '../components';
 
 export default class LocationList extends Component {
+
+  static propTypes = {
+    locations: PropTypes.array.isRequired,
+    fetchLocations: PropTypes.func.isRequired,
+    isConnected: PropTypes.bool.isRequired,
+    isEmpty: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    handlePress: PropTypes.func.isRequired,
+  };
 
   state = {
     dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),

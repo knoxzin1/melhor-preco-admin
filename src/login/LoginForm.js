@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
   StyleSheet
@@ -15,6 +19,15 @@ import {
 } from './LoginModel';
 
 export default class LoginForm extends Component {
+
+  static propTypes = {
+    onFormChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    formValue: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+    }),
+  };
 
   onChange = (value) => {
     this.props.onFormChange(value);

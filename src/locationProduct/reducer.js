@@ -4,7 +4,7 @@ const initialState = {};
 
 export function locationProductReducer(state = initialState, action) {
   switch (action.type) {
-    case FETCH_PRODUCT_SUCCESS:
+    case FETCH_PRODUCT_SUCCESS: {
       const locationProduct = action.payload.locationProduct;
 
       if (!locationProduct) {
@@ -12,6 +12,7 @@ export function locationProductReducer(state = initialState, action) {
       }
 
       return Object.assign(state, action.payload.locationProduct);
+    }
     default:
       return state;
   }

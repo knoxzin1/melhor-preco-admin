@@ -5,7 +5,6 @@ import sinon from 'sinon';
 import { mockStore } from '../__mocks__/';
 import {
   LOGIN_PENDING,
-  LOGIN_SUCCESS,
   LOGIN_FAILURE,
 } from '../app/actionTypes';
 
@@ -32,7 +31,7 @@ describe('login/actions.js', () => {
     });
 
     store.dispatch(login('test@email.com', 'password'))
-      .then(() => {;
+      .then(() => {
         assert.deepEqual(store.getActions(), expectedActions);
         firebaseLogin.restore();
       })
@@ -67,7 +66,7 @@ describe('login/actions.js', () => {
     });
 
     store.dispatch(login('test@email.com', 'password'))
-      .then(() => {;
+      .then(() => {
         assert.deepEqual(store.getActions(), expectedActions);
         firebaseLogin.restore();
       })

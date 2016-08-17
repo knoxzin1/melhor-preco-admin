@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   View,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 
 import t from 'tcomb-form-native';
@@ -15,6 +19,17 @@ import {
 } from './ProductModel';
 
 export default class ProductForm extends Component {
+
+  static propTypes = {
+    created: PropTypes.bool.isRequired,
+    onCreated: PropTypes.func.isRequired,
+    onFormChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    formValue: PropTypes.shape({
+      name: PropTypes.string,
+      price: PropTypes.string,
+    }),
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.created && nextProps.created) {

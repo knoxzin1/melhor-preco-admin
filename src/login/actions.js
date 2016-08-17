@@ -52,7 +52,7 @@ export function clearLogin() {
   return {
     type: CLEAR_LOGIN,
   };
-};
+}
 
 export function updateLoginForm(value) {
   return {

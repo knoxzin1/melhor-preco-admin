@@ -8,7 +8,6 @@ import {
   ADD_PRODUCT_FAILURE,
 
   UPDATE_PRODUCT_FORM,
-  CLEAR_PRODUCT_FORM,
 } from '../app/actionTypes';
 
 const initialState = {
@@ -64,7 +63,7 @@ export function productReducer(state = initialState, action) {
 
 export function productsReducer(state = {}, action) {
   switch (action.type) {
-    case FETCH_PRODUCT_SUCCESS:
+    case FETCH_PRODUCT_SUCCESS: {
       const product = action.payload.product;
 
       if (!product) {
@@ -72,6 +71,7 @@ export function productsReducer(state = {}, action) {
       }
 
       return Object.assign(state, product);
+    }
     default:
       return state;
   }
@@ -80,7 +80,7 @@ export function productsReducer(state = {}, action) {
 const initialFormState = [];
 export function productFormReducer(state = initialFormState, action) {
   switch (action.type) {
-    case UPDATE_PRODUCT_FORM:
+    case UPDATE_PRODUCT_FORM: {
       const {
         name,
         price,
@@ -96,9 +96,8 @@ export function productFormReducer(state = initialFormState, action) {
           price,
         },
       });
-    case CLEAR_PRODUCT_FORM:
-      return initialFormState;
-    case FETCH_PRODUCT_SUCCESS:
+    }
+    case FETCH_PRODUCT_SUCCESS: {
       const {
         productId,
         product,
@@ -120,6 +119,7 @@ export function productFormReducer(state = initialFormState, action) {
           price: locationProduct ? locationProduct[locationProductId].price : '',
         },
       });
+    }
     default:
       return state;
   }

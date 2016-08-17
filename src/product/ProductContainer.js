@@ -1,10 +1,8 @@
 import { connect } from 'react-redux';
 import {
   addProduct,
-  addProductOffline,
   fetchProduct,
   updateProductForm,
-  clearProductForm,
 } from './actions';
 import { productSelector } from './selector';
 import Product from './Product';

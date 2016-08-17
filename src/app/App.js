@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
+
 import {
   Navigator,
   BackAndroid,
-  DrawerLayoutAndroid,
   NetInfo,
 } from 'react-native';
 
@@ -28,6 +31,18 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
 });
 
 export default class App extends Component {
+
+  static propTypes = {
+    actions: PropTypes.shape({
+      checkOfflineProducts: PropTypes.func,
+      checkOfflineProductsSuccess: PropTypes.func,
+      setOnline: PropTypes.func,
+      setOffline: PropTypes.func,
+    }),
+    isStarting: PropTypes.bool,
+    isConnected: PropTypes.bool,
+    isRehydrated: PropTypes.bool,
+  };
 
   componentDidMount() {
     NetInfo.isConnected.addEventListener('change', this.handleConnectionInfoChange);

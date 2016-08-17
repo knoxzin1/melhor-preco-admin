@@ -36,7 +36,7 @@ export function loginReducer(state = initialState, action) {
         error: action.payload,
         userId: null,
       };
-    case LOGIN_SUCCESS:
+    case LOGIN_SUCCESS: {
       const userId = selectn('payload.user.uid', action);
 
       if (!userId) {
@@ -53,6 +53,7 @@ export function loginReducer(state = initialState, action) {
         error: false,
         userId,
       };
+    }
     default:
       return state;
   }
@@ -64,7 +65,7 @@ const initialFormState = {
 };
 export function loginFormReducer(state = initialFormState, action) {
   switch (action.type) {
-    case UPDATE_LOGIN_FORM:
+    case UPDATE_LOGIN_FORM: {
       const {
         email,
         password,
@@ -75,6 +76,7 @@ export function loginFormReducer(state = initialFormState, action) {
         email,
         password,
       };
+    }
     case LOGIN_SUCCESS:
       return initialFormState;
     default:

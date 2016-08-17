@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import {
   login,
   loginSuccess,
-  loginFailure,
   clearLogin,
   updateLoginForm,
 } from './actions';
@@ -10,7 +9,7 @@ import {
 import Login from './Login';
 import { firebase } from '../app/firebase';
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
   return {
     isLoading: state.login.isLoading,
     error: state.login.error,
