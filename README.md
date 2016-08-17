@@ -2,6 +2,8 @@
 
 App para atualizar informações do aplicativo principal
 
+[![build status](https://img.shields.io/travis/knoxzin1/melhor-preco-admin/master.svg?style=flat-square)](https://travis-ci.org/knoxzin1/melhor-preco-admin)
+
 ## Instalando para desenvolvimento
 
 ### Pré-Requisitos
