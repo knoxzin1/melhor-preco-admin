@@ -3,6 +3,8 @@ node_js:
   - "4"
   - "5"
   - "6"
+before_script:
+  - cp config.example.js config.js
 script:
   - npm run lint
   - npm test
